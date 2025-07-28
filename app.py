@@ -12,14 +12,15 @@ app = Flask(__name__)
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
+        rol = request.form['rol']
         rut = request.form['rut']
         nombre = request.form['nombre']
-        direccion = request.form['direccion']
+        siac = request.form['siac']
 
-        return generate_pdf(rut, nombre, direccion)
+        return generate_pdf(rol, rut, nombre, siac)
     return render_template('index.html')
 
-def generate_pdf(rut, nombre, direccion):
+def generate_pdf(rol, rut, nombre, siac):
     buffer = io.BytesIO()
     c = canvas.Canvas(buffer, pagesize=letter)
 
@@ -29,40 +30,53 @@ def generate_pdf(rut, nombre, direccion):
 
     # Fecha actual
     fecha_actual = datetime.date.today().strftime("%d de %B de %Y")
-    c.drawString(width - margin - c.stringWidth(fecha_actual), height - margin, fecha_actual)
+    #c.drawString(width - margin - c.stringWidth(fecha_actual), height - margin, fecha_actual)
 
     # Remitente (puedes personalizar esto)
-    c.drawString(margin, height - margin - 50, "De: Tu Empresa S.A.")
-    c.drawString(margin, height - margin - 65, "Dirección de la Empresa #123")
-    c.drawString(margin, height - margin - 80, "Santiago, Chile")
+    #c.drawString(margin, height - margin - 50, "De: Tu Empresa S.A.")
+    #c.drawString(margin, height - margin - 65, "Dirección de la Empresa #123")
+    #c.drawString(margin, height - margin - 80, "Santiago, Chile")
 
     # Destinatario
-    c.drawString(margin, height - margin - 120, f"Para: {nombre}")
-    c.drawString(margin, height - margin - 135, f"RUT: {rut}")
-    c.drawString(margin, height - margin - 150, f"Dirección: {direccion}")
+    #c.drawString(margin, height - margin - 120, f"Para: {nombre}")
+    #c.drawString(margin, height - margin - 135, f"RUT: {rut}")
+    #c.drawString(margin, height - margin - 150, f"Dirección: {direccion}")
 
     # Título de la carta
     c.setFont("Helvetica-Bold", 16)
-    c.drawCentredString(width / 2, height - margin - 200, "CARTA DE CONFIRMACIÓN DE DATOS")
-
+    c.drawCentredString(width / 2, height - margin - 50, "INFORME DE EXPROPIACION")
+    c.setFont("Helvetica-Bold", 14)
+    c.drawCentredString(width / 2, height - margin - 65, "DIRECCION DE VIALIDAD")
+    c.drawCentredString(width / 2, height - margin - 80, "REGION DE LOS RIOS")
     # Contenido de la carta
     c.setFont("Helvetica", 12)
-    y_position = height - margin - 250
+    y_position = height - margin - 150
     lines = [
-        f"Estimado/a {nombre},",
+        f"Informe de Expropiacion N°{nombre},",
         "",
-        "Por medio de la presente, confirmamos la recepción y registro de sus datos en nuestro sistema.",
-        "A continuación, detallamos la información proporcionada por usted:",
+        "1. La direccion Regional de Vialidad informa que, a la fecha de este documento y de.",
+        "   acuerdo a los antecedentes que actualmente existen de los proyectos de esta direccion, la",
+        "   propiedad ubicada en la comuna de VALDIVIA, Región de Los Riós, identificada con el Rol de",
+        f"   Avaluo SII N° {rol}, no se encontraria afecta a expropiacion con motivo de futuro",
+        "   proyecto en el sector.",
         "",
-        f"   - RUT: {rut}",
-        f"   - Nombre Completo: {nombre}",
-        f"   - Dirección: {direccion}",
+        "2. Este documento no exime a la propiedada del cumplimiento de las obligaciones principales",
+        "   emanadas de los instrumentos de Planificacion Territorial vigentes o de otros proyectos,",
+        "   por lo tanto el interesado debera consultar en los organismos pertinentes sobre la materia.",
         "",
-        "Agradecemos su confianza. Si tiene alguna duda o necesita realizar alguna",
-        "modificación, por favor no dude en contactarnos.",
+        f"3. Se otorga a peticion de: {nombre}, RUT {rut}, por su solicitud",
+        f"   SIAC N° {siac} y para los fines que estime convenientes.",
         "",
-        "Atentamente,",
-        "El equipo de Tu Empresa S.A."
+        "4. Este informe no acredita dominio de la propiedad y la informacion contenida en el se ha",
+        "   determinado en base a los antecedentes del inmueble proporcionados por el interesado,",
+        "   de modo que cualquier inexactitud de los mismos no es responsabilidad de este servicio",
+        "",
+        "5. El presente documento no es garantia de que el predio no pueda ser expropiado",
+        "   futuro.",
+        "",
+        "",
+        "",
+        f"Valdivia, {fecha_actual}.",
     ]
 
     for line in lines:
