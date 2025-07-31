@@ -1,0 +1,9 @@
+{% if resultado.valido %}
+  <h2>¡Documento válido!</h2>
+  <p><strong>Funcionario:</strong> {{ resultado.nombre_funcionario }}</p>
+  <p><strong>Tipo:</strong> {{ resultado.tipo_documento }}</p>
+  <p><strong>Fecha de emisión:</strong> {{ resultado.fecha_emision }}</p>
+{% else %}
+  <h2>Documento inválido o no registrado.</h2>
+{% endif %}
+<a href="{{ url_for('validar') }}">Validar otro</a>

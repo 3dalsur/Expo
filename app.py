@@ -85,7 +85,10 @@ def generate_pdf(rol, rut, nombre, siac):
 
     # --- Generación y adición del QR de verificación ---
     verification_data = f"Documento validado para RUT: {rut}, Nombre: {nombre}"
-    verification_url = f"https://www.ejemplo.com/verificar?id={rut}" # Reemplaza con tu URL de verificación real
+    # --- verification_url = f"https://www.ejemplo.com/verificar?id={rut}" # Reemplaza con tu URL de verificación real
+    verification_url = f"https://labsurconsultores.cl/valida_doc/" # Reemplaza con tu URL de verificación real
+
+    
 
     # Generar el código QR
     qr = qrcode.QRCode(
