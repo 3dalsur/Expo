@@ -124,7 +124,7 @@ def generate_pdf(rol, rut, nombre, siac):
     # Agregar la imagen del QR al documento
     qr_image = PlatypusImage(img_buffer, width=100, height=100)
     
-    story.append(Spacer(1, 100)) # Espacio para el QR
+    story.append(Spacer(1, 50)) # Espacio para el QR
     story.append(qr_image)
     story.append(Paragraph("Escanee para verificar", styles['Normal']))
 
