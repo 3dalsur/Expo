@@ -84,12 +84,12 @@ def generate_pdf(rol, rut, nombre, siac):
     story.append(Spacer(1, 24))
 
     # Párrafos del contenido con justificación
-    p1_text = f"Informe de Expropiacion N° {numero_aleatorio},<br/><br/>1. La Direccion Regional de Vialidad informa que, a la fecha de este documento y de acuerdo a los antecedentes que actualmente existen de los proyectos de esta direccion, la propiedad ubicada en la comuna de VALDIVIA, Región de Los Riós, identificada con el Rol de Avaluo SII N° {rol}, no se encontraria afecta a expropiacion con motivo de futuros proyectos en el sector."
-    p2_text = "2. Este documento no exime a la propiedad del cumplimiento de las obligaciones principales emanadas de los instrumentos de Planificacion Territorial vigentes o de otros proyectos, por lo tanto el interesado debera consultar en los organismos pertinentes sobre la materia."
-    p3_text = f"3. Se otorga a peticion de: Sr(a) {nombre}, RUT {rut}, por su solicitud SIAC N° {siac} y para los fines que estime convenientes."
-    p4_text = "4. Este informe no acredita dominio de la propiedad y la informacion contenida en el se ha determinado en base a los antecedentes del inmueble proporcionados por el interesado, de modo que cualquier inexactitud de los mismos no es responsabilidad de este servicio"
-    p5_text = "5. El presente documento no es garantia de que el predio no pueda ser expropiado a futuro."
-    p6_text = f"Nro. {numero_aleatorio}"
+    p1_text = f"Informe de Expropiación N° {numero_aleatorio}.<br/><br/>1.- La Dirección Regional de Vialidad informa que, a la fecha de este documento y de acuerdo a los antecedentes que actualmente existen de los proyectos de esta dirección, la propiedad ubicada en la comuna de VALDIVIA, Región de Los Riós, identificada con el Rol de Avaluo SII N° {rol}, no se encontraria afecta a expropiación con motivo de futuros proyectos en el sector."
+    p2_text = "2.- Este documento no exime a la propiedad del cumplimiento de las obligaciones principales emanadas de los instrumentos de Planificación Territorial vigentes o de otros proyectos, por lo tanto el interesado debera consultar en los organismos pertinentes sobre la materia."
+    p3_text = f"3.- Se otorga a peticion de: Sr(a). {nombre}, RUT {rut}, por su solicitud SIAC N° {siac} y para los fines que estime convenientes."
+    p4_text = "4.- Este informe no acredita dominio de la propiedad y la informacion contenida en el se ha determinado en base a los antecedentes del inmueble proporcionados por el interesado, de modo que cualquier inexactitud de los mismos no es responsabilidad de este servicio"
+    p5_text = "5.- El presente documento no es garantia de que el predio no pueda ser expropiado a futuro."
+    p6_text = f"<b>Nro. {numero_aleatorio}</b>"
 
     story.append(Paragraph(p1_text, body_style))
     story.append(Paragraph(p2_text, body_style))
@@ -102,7 +102,7 @@ def generate_pdf(rol, rut, nombre, siac):
     story.append(Spacer(1, 24))
 
     # Fecha al final
-    story.append(Paragraph(f"Valdivia, {fecha_actual}.", normal_style))
+    story.append(Paragraph(f"<b>Valdivia</b>, {fecha_actual}.", normal_style))
 
     # --- Generación y adición del QR de verificación ---
     verification_url = f"https://labsurconsultores.cl/valida_doc/"
@@ -126,7 +126,7 @@ def generate_pdf(rol, rut, nombre, siac):
     
     story.append(Spacer(1, 50)) # Espacio para el QR
     story.append(qr_image)
-    story.append(Paragraph("Escanee, para verificar documento", styles['Normal']))
+    story.append(Paragraph("Escanee, para verificar documento.", styles['Normal']))
 
     # Construir el documento
     doc.build(story)
