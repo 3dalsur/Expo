@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, send_file
-from reportlab.lib.pagesizes import letter
+from reportlab.lib.pagesizes import legal
 from reportlab.pdfgen import canvas
 from reportlab.lib.utils import ImageReader
 import io
@@ -31,7 +31,7 @@ def generate_pdf(rol, rut, nombre, siac):
     buffer = io.BytesIO()
 
     # Usar SimpleDocTemplate para manejar el flujo de texto y justificación
-    doc = SimpleDocTemplate(buffer, pagesize=letter)
+    doc = SimpleDocTemplate(buffer, pagesize=legal, topMargin=0)
     story = []
 
     # Configuración de estilos
@@ -57,6 +57,7 @@ def generate_pdf(rol, rut, nombre, siac):
         parent=styles['Normal'],
         fontName='Helvetica',
         fontSize=12,
+        leading=16,
         alignment=TA_JUSTIFY, # TA_JUSTIFY para justificación completa
         spaceAfter=12
     )
@@ -66,8 +67,17 @@ def generate_pdf(rol, rut, nombre, siac):
         parent=styles['Normal'],
         fontName='Helvetica',
         fontSize=12,
+        leading=16,
+        alignment=0, # 0 es para izquierda
         spaceAfter=12
     )
+
+    # Cargar y agregar la imagen "vialidad.jpg" antes de los títulos
+    try:
+        logo_vialidad = PlatypusImage("logo_vialidad.png", width=80, height=80, hAlign="LEFT")
+        story.append(logo_vialidad)
+    except FileNotFoundError:
+        print("Error: vialidad.jpg not found. Skipping image.")
 
     # Fecha actual
     fecha_actual = datetime.date.today().strftime("%d de %B de %Y")
