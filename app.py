@@ -84,9 +84,9 @@ def generate_pdf(rol, rut, nombre, siac):
     story.append(Spacer(1, 24))
 
     # Párrafos del contenido con justificación
-    p1_text = f"Informe de Expropiación N° {numero_aleatorio}.<br/><br/>1.- La Dirección Regional de Vialidad informa que, a la fecha de este documento y de acuerdo a los antecedentes que actualmente existen de los proyectos de esta dirección, la propiedad ubicada en la comuna de VALDIVIA, Región de Los Riós, identificada con el Rol de Avaluo SII N° {rol}, no se encontraria afecta a expropiación con motivo de futuros proyectos en el sector."
+    p1_text = f"Informe de Expropiación N° <b>{numero_aleatorio}</b>.<br/><br/>1.- La Dirección Regional de Vialidad informa que, a la fecha de este documento y de acuerdo a los antecedentes que actualmente existen de los proyectos de esta dirección, la propiedad ubicada en la comuna de VALDIVIA, Región de Los Riós, identificada con el Rol de Avaluo SII N° <b>{rol}</b>, no se encontraria afecta a expropiación con motivo de futuros proyectos en el sector."
     p2_text = "2.- Este documento no exime a la propiedad del cumplimiento de las obligaciones principales emanadas de los instrumentos de Planificación Territorial vigentes o de otros proyectos, por lo tanto el interesado debera consultar en los organismos pertinentes sobre la materia."
-    p3_text = f"3.- Se otorga a peticion de: Sr(a). {nombre}, RUT {rut}, por su solicitud SIAC N° {siac} y para los fines que estime convenientes."
+    p3_text = f"3.- Se otorga a peticion de: Sr(a). <b>{nombre}</b>, RUT <b>{rut}</b>, por su solicitud SIAC N° <b>{siac}</b> y para los fines que estime convenientes."
     p4_text = "4.- Este informe no acredita dominio de la propiedad y la informacion contenida en el se ha determinado en base a los antecedentes del inmueble proporcionados por el interesado, de modo que cualquier inexactitud de los mismos no es responsabilidad de este servicio"
     p5_text = "5.- El presente documento no es garantia de que el predio no pueda ser expropiado a futuro."
     p6_text = f"<b>Nro. {numero_aleatorio}</b>"
